@@ -1,0 +1,7 @@
+{
+  "name": "penerimaan-tamu-boyolali",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
