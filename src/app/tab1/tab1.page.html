@@ -1,17 +1,99 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" [class.blur]="isModalOpen">
+  <div class="atas">
+    <img src="assets/images/profile.png" class="profile-img">
+    <div class="judul">
+      <h3>Hallo,</h3>
+      <h2>Alex Mandalika, S.Kom</h2>
+    </div>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="top-container">
+    <p>Dapil Boyolali 1</p>
+    <p>Fraksi Partai Demokrasi Indonesia Perjuangan Komisi Kementrian Luar Negeri</p>
+  </div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="melengkung"></div>
+  <div class="kebawah">
+    <p>Senin, 29 Juli 2024</p>
+  </div>
+
+  <ion-card class="custom-card" style="margin-top: 5rem; border-radius: 20px;margin-left: 20px; margin-right: 20px;">
+    <ion-card-content>
+      <p>Grafik Pie Kunjungan</p>
+      <div class="pie-chart">
+        <div class="pie-segment completed"></div>
+        <div class="pie-segment not-completed"></div>
+        <div class="center-hole"></div>
+      </div>
+      <div class="percentage completed-percentage">70%</div>
+      <div class="percentage not-completed-percentage">30%</div>
+      <div class="chart-legend">
+        <div><span class="legend-color completed"></span>Kunjungan Selesai</div>
+        <div><span class="legend-color not-completed"></span>Kunjungan Belum Selesai</div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-row class="container" style="margin-top: 20px; margin-left: 15px; margin-right: 15px;">
+    <ion-col size="6">
+      <div class="box" (click)="goToPage('kunjungan-selesai')">
+        <div class="content">
+          <ion-icon name="checkmark-done-outline"></ion-icon>
+          <div class="badge">42</div>
+        </div>
+        <p>Kunjungan Selesai</p>
+      </div>
+    </ion-col>
+
+    <ion-col size="6">
+      <div class="box" (click)="goToPage('tab2')">
+        <div class="content">
+          <ion-icon name="list-outline"></ion-icon>
+          <div class="badge">11</div>
+        </div>
+        <p>Kunjungan Belum Selesai</p>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <div class="suara-masyarakat" (click)="goToPage('suara-masyarakat')">
+    <ion-item class="custom-item">
+      <img src="assets/images/suara.png" class="custom-icon" slot="start">
+      <ion-label>Suara Masyarakat</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end" class="chevron-icon"></ion-icon>
+    </ion-item>
+  </div>
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-container *ngIf="isModalOpen">
+      <div class="modal-content">
+        <h3>Jadwal Kunjungan Hari Ini</h3>
+
+        <div class="schedule-item">
+          <p class="item-label">Tempat </p>
+          <p class="item-value">:Kelurahan Ngasem</p>
+        </div>
+        <div class="schedule-item">
+          <p class="item-label">Waktu </p>
+          <p class="item-value">:09:00 - 12:00 WIB</p>
+        </div>
+
+        <div class="titik"></div>
+
+        <div class="schedule-item">
+          <p class="item-label">Tempat </p>
+          <p class="item-value">:Kelurahan Salaman</p>
+        </div>
+        <div class="schedule-item">
+          <p class="item-label">Waktu </p>
+          <p class="item-value">:13:00 - 15:00 WIB</p>
+        </div>
+
+        <div class="modal-buttons">
+          <ion-button fill="clear" (click)="closeModal()" class="btn-tutup">Tutup</ion-button>
+          <ion-button fill="clear" (click)="moreDetails()" class="btn-selengkapnya">Selengkapnya</ion-button>
+        </div>
+      </div>
+    </ng-container>
+  </ion-modal>
 </ion-content>

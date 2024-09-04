@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title><p>Jadwal</p></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (submit)="searchReport()">
+    <ion-item button (click)="toggleOptions()">
+      <ion-label>Pilih Kategori</ion-label>
+      <ion-icon [name]="showOptions ? 'chevron-up-outline' : 'chevron-down-outline'" slot="end"></ion-icon>
+    </ion-item>
+
+    <div *ngIf="showOptions" class="category-dropdown">
+      <ion-list lines="none">
+        <ion-item button (click)="selectOption('Tahun')">Tahun</ion-item>
+        <ion-item button (click)="selectOption('Bulan')">Bulan</ion-item>
+        <ion-item button (click)="selectOption('Hari')">Hari</ion-item>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-item button (click)="cancelSelection()">Cancel</ion-item>
+      </ion-list>
+    </div>
+
+    <ion-item *ngIf="selectedOption === 'Tahun'">
+      <ion-label>Tahun</ion-label>
+      <ion-select [(ngModel)]="selectedYear" interface="action-sheet" (ionChange)="onYearChange($event)">
+        <ion-select-option *ngFor="let year of years" [value]="year">{{ year }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="selectedOption === 'Bulan'">
+      <ion-label>Bulan</ion-label>
+      <ion-select [(ngModel)]="selectedMonth" interface="action-sheet" (ionChange)="onMonthChange($event)">
+        <ion-select-option *ngFor="let month of month" [value]="month">{{ month }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-input placeholder=" "></ion-input>
+    </ion-item>
+    <ion-label>P:</ion-label>
+    <ion-item>
+      <ion-input placeholder=" "></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit">CARI</ion-button>
+  </form>
+
+  <div *ngIf="showReport && (selectedYear || selectedMonth || (startDate && endDate))">
+    <ion-list>
+      <ion-card *ngFor="let event of events">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            <div class="event-date" style="font-size: 15px;">{{ event.date | date: 'fullDate' }}</div>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="row">
+            <div class="col">
+              <div class="event-details">
+                <p>Tempat</p><p class="event-place">: {{ event.place }}</p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="event-details">
+                <p>Waktu</p><p class="event-time">: {{ event.time }}</p>
+              </div>
+            </div>
+          </div>
+          <ion-button class="custom-button" (click)="goToDetail()">Lapor Kegiatan</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </div>
+</ion-content>

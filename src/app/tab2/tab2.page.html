@@ -1,17 +1,108 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title><p>Jadwal</p></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <!-- kalo ada form bisa pake form control atau kalo ngmodel([ngModelOptions]="{standalone: true}) -->
+  <form (submit)="searchReport()">
+    <ion-item button (click)="toggleOptions()">
+      <ion-label>Pilih Kategori</ion-label>
+      <ion-icon [name]="showOptions ? 'chevron-up-outline' : 'chevron-down-outline'" slot="end"></ion-icon>
+    </ion-item>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <div *ngIf="showOptions" class="category-dropdown">
+      <ion-list lines="none">
+        <ion-item button (click)="selectOption('Tahun')">Tahun</ion-item>
+        <ion-item button (click)="selectOption('Bulan')">Bulan</ion-item>
+        <ion-item button (click)="selectOption('Hari')">Hari</ion-item>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-item button (click)="cancelSelection()">Cancel</ion-item>
+      </ion-list>
+    </div>
+
+    <!-- judul -->
+    <!-- <ion-text *ngIf="selectedOption === 'Hari'" color="primary">
+      <p style="text-align: center; color: #C73336; font-size: 19px; font-weight: bold;">Hari</p>
+    </ion-text>
+    <ion-text *ngIf="selectedOption === 'Bulan'" color="primary">
+      <p style="text-align: center; color: #C73336; font-size: 19px; font-weight: bold;">Bulan</p>
+    </ion-text>
+    <ion-text *ngIf="selectedOption === 'Tahun'" color="primary">
+      <p style="text-align: center; color: #C73336; font-size: 19px; font-weight: bold;">Tahun</p>
+    </ion-text> -->
+
+    <ion-text *ngIf="selectedOption" color="primary">
+      <p style="text-align: center; color: #C73336; font-size: 19px; font-weight: bold;">{{ selectedOption }}</p>
+    </ion-text>
+
+    <ion-item *ngIf="selectedOption === 'Tahun' || selectedOption === 'Bulan'">
+      <ion-label>Tahun</ion-label>
+      <ion-select [(ngModel)]="selectedYear" [ngModelOptions]="{standalone: true}" interface="action-sheet" (ionChange)="onYearChange($event)">
+        <ion-select-option *ngFor="let year of years" [value]="year">{{ year }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- <ion-item *ngIf="selectedOption === 'Bulan'">
+      <ion-label>Tahun</ion-label>
+      <ion-select [(ngModel)]="selectedYear" interface="action-sheet" (ionChange)="onYearChange($event)">
+        <ion-select-option *ngFor="let yearf of yearf" [value]="yearf">{{ yearf }}</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+
+    <ion-item *ngIf="selectedOption === 'Bulan' && selectedYear">
+      <ion-label>Bulan</ion-label>
+      <ion-select [(ngModel)]="selectedMonth" [ngModelOptions]="{standalone: true}" interface="action-sheet" (ionChange)="onMonthChange($event)">
+        <ion-select-option *ngFor="let month of months" [value]="month">{{ month }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="selectedOption === 'Hari'" button (click)="toggleStartDatePicker()">
+      <ion-label>Tanggal Awal</ion-label>
+      <ion-input [value]="startDate | date: 'dd MMM yyyy'" readonly></ion-input>
+    </ion-item>
+    <ion-datetime *ngIf="showDatePickerStart" display-format="DD MMM YYYY" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" (ionChange)="onStartDateChange($event)"></ion-datetime>
+
+    <ion-item *ngIf="selectedOption === 'Hari'" button (click)="toggleEndDatePicker()">
+      <ion-label>Tanggal Akhir</ion-label>
+      <ion-input [value]="endDate | date: 'dd MMM yyyy'" readonly></ion-input>
+    </ion-item>
+    <ion-datetime *ngIf="showDatePickerEnd" display-format="DD MMM YYYY" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}" (ionChange)="onEndDateChange($event)"></ion-datetime>
+
+    <ion-button expand="block" type="submit">CARI</ion-button>
+  </form>
+
+  <div *ngIf="showReport && (selectedYear || selectedMonth || (startDate && endDate))">
+    <ion-list>
+      <ion-card *ngFor="let event of events">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            <div class="event-date" style="font-size: 15px;">{{ event.date | date: 'fullDate' }}</div>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="row">
+            <div class="col">
+              <div class="event-details">
+                <p>Tempat</p><p class="event-place">: {{ event.place }}</p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="event-details">
+                <p>Waktu</p><p class="event-time">: {{ event.time }}</p>
+              </div>
+            </div>
+          </div>
+          <ion-button class="custom-button" (click)="goToDetail()">Lapor Kegiatan</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </div>
 </ion-content>

@@ -1,0 +1,37 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title ><p>Suara Rakyat</p></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let event of events">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          <div class="event-date" style="font-size: 17px; text-align: left; margin-left: 10px;"><p>{{ event.date}}</p></div>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="row">
+          <div class="col"  >
+            <div class="event-details" style="display: flex;">
+              <p style="flex: 6;" >Anggaran</p><p class="event-place" style="padding-right: 12px;" style="flex: 5.2;">: {{ event.place }}</p>
+            </div>
+          </div>
+          <div class="col" style="display: flex;">
+            <div class="event-details" style="font-size: 10px;">
+              <p  style="flex: 6;">Komisi</p><p class="event-time"  style="flex: 4;">: {{ event.time }}</p>
+            </div>
+          </div>
+        </div>
+        <ion-button class="custom-button" (click)="goToDetail()">Detail</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

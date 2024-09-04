@@ -1,0 +1,75 @@
+<div class="content-wrapper" [class.blur]="isModalOpen">
+  <div class="container">
+    <img src="assets/images/logo.png" alt="Logo" class="logo">
+    <div class="title">KUNJUNGAN KERJA</div>
+    <div class="subtitle" style="color: #FFF000;">DPRD Kabupaten Boyolali</div>
+    <!-- bagian login -->
+    <div class="login-card">
+      <h2>Login</h2>
+      <div class="input-wrapper">
+        <ion-input 
+          [(ngModel)]="nik" 
+          placeholder="NIK" 
+          type="tel" 
+          (keydown)="validateInput($event)" 
+          maxlength="16" 
+          class="custom-input">
+        </ion-input>
+      </div>           
+      <ion-button expand="block" (click)="openSavePopup()">MASUK</ion-button>
+      <div class="footer">
+        <p style="color: black;">DPRD Setwan Kabupaten Boyolali</p>
+        <p style="color: #DF251D;">Versi 1.2</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- pop up valid -->
+<ng-container *ngIf="isModalOpen">
+  <ion-backdrop (click)="closeSavePopup()"></ion-backdrop>
+
+  <div class="popup-container" *ngIf="isNumber">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <div>
+          <p style="font-size: 20px;color: #C73336;">Data Ditemukan</p>
+        </div>
+      </ion-card-title>
+    </ion-card-header>
+    <div class="popup-content">
+      <p><span class="label">Nama</span><span class="value">: Alex Mandalika, S. Kom.</span></p>
+      <p><span class="label">NIK</span><span class="value">: 332211655440007</span></p>
+      <p><span class="label">Fraksi</span><span class="value">: PDIP</span></p>
+      <p><span class="label">Komisi</span><span class="value">: Kementrian Luar Negeri</span></p>
+      <p><span class="label">ID Device Terdaftar</span><span class="value">: t87q8vd9s</span></p>
+      <p><span class="label">ID Device</span><span class="value">: t87q8vd9s</span></p>
+    </div>
+    
+    <div class="button-wrapper">
+      <ion-button style="border-radius: 5px;" expand="block" (click)="cancel()" class="cancel-button">Batal</ion-button>
+      <ion-button expand="block" (click)="goToTab1()"  class="confirm-button">Masuk</ion-button>
+    </div>
+  </div>
+
+  <!-- pop up invalid -->
+  <div class="popup-container" *ngIf="!isNumber">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <div>
+          <p style="font-size: 20px;color: #C73336;">Data Tidak Ditemukan</p>
+        </div>
+      </ion-card-title>
+    </ion-card-header>
+    <div class="popup-content">
+      <p style="text-align: center;">NIK Belum Terdaftar :(</p>
+    </div>
+    
+    <div class="button-wrapper">
+      <ion-button style="border-radius: 5px;" expand="block" (click)="cancel()" class="cancel-button">Batal</ion-button>
+    </div>
+  </div>
+</ng-container>

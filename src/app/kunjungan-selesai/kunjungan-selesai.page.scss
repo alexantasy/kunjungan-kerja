@@ -1,0 +1,206 @@
+/* CSS */
+ion-card {
+    margin-bottom: 16px;
+    font-family: Poppins;
+    border-radius: 8px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  
+  ion-card-header {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    width: 100%; 
+    font-size: 10px;
+    color: #C73336 12%;
+    background-color: #c5151572 ;
+    height: 24px;
+    border-radius: 6px;
+  }
+  
+  ion-card-title ion-icon {
+    margin-right: 8px;
+    color: #e91e63;
+  }
+  
+  .event-date {
+    flex: 1;  
+    text-align: center;  
+    font-size: 16px;
+    color: #db2020;
+  }
+  
+  .event-details {
+    display: flex;
+    justify-content: space-between;
+    --font-size: 10px;
+    color: #333;
+  }
+  
+  ion-button {
+    margin-top: 16px;
+    width: 100%;
+    border-radius: 12px;
+    --border-radius: 6px;  
+    --background:linear-gradient(92.63deg, #C73336 0.01%, #953233 99.99%);
+
+  }
+  
+  ion-toolbar {
+    --background: #953233;
+    color: #fff;
+    text-align: left;
+    font-size: 10px;
+  }
+
+
+  .event-time {
+    margin-right: 33px;
+  }
+  .event-place {
+    margin-right: 18px;
+  }
+  
+  .col p {
+    font-size: 17px;
+  }
+
+  .cari-button {
+    --background: #C73336; /* Button color */
+    margin-top: 20px;
+  }
+
+  .category-options {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  ion-item {
+    --background: transparent;
+  }
+  
+  ion-item button {
+    --color: #000;
+  }
+
+  
+  
+ 
+ion-select {
+  ion-select-popover {
+    .select-interface-option {
+      height: 50px;
+      display: flex;
+      align-items: center; 
+    }
+  }
+}
+
+.category-dropdown ion-list:nth-child(1) {
+  margin-bottom: 10px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+}
+
+.category-dropdown ion-list:nth-child(2) {
+  background-color: #f8d7da;
+  border-radius: 10px;
+  text-align: center;
+}
+
+
+.report-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  margin: 10px 0;
+}
+
+
+.report-grid div {
+  flex: 1;
+  text-align: center;
+}
+
+
+.report-grid p {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+ion-chip {
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+ion-item {
+  --inner-padding-start: 0;
+}
+
+ion-input {
+  text-align: center;
+}
+
+/* Optional: Style the labels to be aligned to the left while keeping the input centered */
+ion-label {
+  width: 100px;
+}
+
+.date-item ion-input {
+  flex: 1;
+  margin-left: 10px;
+}
+ion-item {
+  display: flex;
+  align-items: center;
+}
+
+ion-label {
+  flex: 1;
+  margin-right: 10px;
+  white-space: nowrap; /* Prevents the label from wrapping */
+}
+
+ion-input {
+  flex: 2;
+  text-align: right;
+}
+
+/* Optional: Adjust padding inside the item */
+ion-item {
+  --inner-padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+ion-grid {
+  justify-content: center;
+}
+
+ion-row {
+  justify-content: center;
+}
+
+ion-item {
+  text-align: center;
+  justify-content: center;
+}
+
+ion-label {
+  text-align: center;
+  width: 100%;
+}
+
+ion-input {
+  text-align: center;
+  width: 100%;
+}
+
